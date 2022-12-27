@@ -4,6 +4,7 @@ local COLOR_WHITE = Color3.fromRGB(255, 255, 255)
 local COLOR_GRAY = Color3.fromRGB(150, 150, 150)
 local COLOR_LIGHT_GRAY = Color3.fromRGB(200, 200, 200)
 local COLOR_DARK_GRAY = Color3.fromRGB(100, 100, 100)
+local COLOR_GREEN = Color3.fromRGB(0, 255, 0)
 
 -- Utility functions
 
@@ -78,7 +79,4 @@ local Button = {}
 Button.__index = Button
 
 function Button.new(text, x, y, width, height)
-  local self = setmetatable(Element.new(x, y, width, height), Button)
-  self.Text = text
-  self.IsMouseOver = false
-  self.IsP
+  local self = setmetatable(Element.
