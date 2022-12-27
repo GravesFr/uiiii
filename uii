@@ -1,0 +1,84 @@
+
+local COLOR_BLACK = Color3.fromRGB(0, 0, 0)
+local COLOR_WHITE = Color3.fromRGB(255, 255, 255)
+local COLOR_GRAY = Color3.fromRGB(150, 150, 150)
+local COLOR_LIGHT_GRAY = Color3.fromRGB(200, 200, 200)
+local COLOR_DARK_GRAY = Color3.fromRGB(100, 100, 100)
+
+-- Utility functions
+
+local function CreateLabel(text, fontSize, color, align)
+  local label = Instance.new("TextLabel")
+  label.Text = text
+  label.FontSize = fontSize
+  label.TextColor3 = color
+  label.TextXAlignment = align
+  label.TextYAlignment = Enum.TextYAlignment.Center
+  label.Size = UDim2.new(1, 0, 1, 0)
+  label.BackgroundTransparency = 1
+  label.ClipsDescendants = true
+  return label
+end
+
+local function CreateFrame(color)
+  local frame = Instance.new("Frame")
+  frame.BackgroundColor3 = color
+  frame.BorderSizePixel = 0
+  return frame
+end
+
+local function CreateImageLabel(image, color)
+  local imageLabel = Instance.new("ImageLabel")
+  imageLabel.Image = image
+  imageLabel.ImageColor3 = color
+  imageLabel.Size = UDim2.new(1, 0, 1, 0)
+  imageLabel.BackgroundTransparency = 1
+  imageLabel.ClipsDescendants = true
+  return imageLabel
+end
+
+-- Element class
+
+local Element = {}
+Element.__index = Element
+
+function Element.new(x, y, width, height)
+  local self = setmetatable({}, Element)
+  self.X = x
+  self.Y = y
+  self.Width = width
+  self.Height = height
+  self.Visible = true
+  self.Frame = CreateFrame(COLOR_WHITE)
+  self.Frame.Position = UDim2.new(0, x, 0, y)
+  self.Frame.Size = UDim2.new(0, width, 0, height)
+  return self
+end
+
+function Element:SetVisible(visible)
+  self.Visible = visible
+  self.Frame.Visible = visible
+end
+
+function Element:SetPosition(x, y)
+  self.X = x
+  self.Y = y
+  self.Frame.Position = UDim2.new(0, x, 0, y)
+end
+
+function Element:SetSize(width, height)
+  self.Width = width
+  self.Height = height
+  self.Frame.Size = UDim2.new(0, width, 0, height)
+end
+
+-- Button class
+
+local Button = {}
+Button.__index = Button
+
+function Button.new(text, x, y, width, height)
+  local self = setmetatable(Element.new(x, y, width, height), Button)
+  self.Text = text
+  self.IsMouseOver = false
+  self.IsP
